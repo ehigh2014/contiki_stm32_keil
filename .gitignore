@@ -7,3 +7,5 @@
 *.build_log*
 *.uvgui*
 *.orig
+*.axf
+*.dep
