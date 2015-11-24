@@ -40,6 +40,26 @@
 
 #endif
 
+/**
+ * \brief uart nvic configuration
+ * \param void
+ * 
+ *
+ */
+void
+uart_nvic_config(void)
+{
+	NVIC_InitTypeDef NVIC_InitStructure;
+	  /* Configure the NVIC Preemption Priority Bits */  
+  NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
+  
+  /* Enable the USARTy Interrupt */
+  NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
+  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+  NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+  NVIC_Init(&NVIC_InitStructure);
+}
+
 void
 dbg_setup_uart(void)
 {
@@ -51,6 +71,8 @@ dbg_setup_uart(void)
     RCC_APB2PeriphClockCmd(DBG_UART_RCC, ENABLE);
 	  RCC_APB2PeriphClockCmd(DBG_UART_TX_RCC, ENABLE);
 #endif
+	
+		uart_nvic_config();
 	
     //TX port
     GPIO_InitStructure.GPIO_Pin= DBG_UART_TX_PIN;
@@ -71,6 +93,10 @@ dbg_setup_uart(void)
     USART_InitStructure.USART_HardwareFlowControl= USART_HardwareFlowControl_None;
     USART_InitStructure.USART_Mode= USART_Mode_Rx | USART_Mode_Tx;
     USART_Init(DBG_UART,&USART_InitStructure);
+		
+		/*  Enable the UART1 Receive interrupts */
+		USART_ITConfig(DBG_UART, USART_IT_RXNE, ENABLE);
+		
     //UART Enable
     USART_Cmd(DBG_UART,ENABLE);
 }
@@ -88,5 +114,7 @@ fputc(int ch, FILE* f)
     while(USART_GetFlagStatus(DBG_UART, USART_FLAG_TXE)== RESET );
     return ch;
 }
+
+
 
 

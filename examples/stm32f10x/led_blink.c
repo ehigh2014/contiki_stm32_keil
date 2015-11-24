@@ -56,13 +56,11 @@ PROCESS_THREAD(blink_process, ev, data)
         {
             led_state = 0;
             GPIO_SetBits(LED_GPIO, LED_PIN);
-            printf("LED off\n");
         }
         else
         {
             led_state = 1;
             GPIO_ResetBits(LED_GPIO, LED_PIN);
-            printf("LED on\n");
         }
     }
 

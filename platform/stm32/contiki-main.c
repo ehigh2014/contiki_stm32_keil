@@ -20,9 +20,14 @@
 #include "clock.h"
 #include "etimer.h"
 #include "sys/process.h"
+#include "dev/serial-line.h"
+#include "dev/uart1.h"
 
 #ifdef WITH_LED_BLINK
 extern struct process blink_process;
+#endif
+#ifdef WITH_CONTIKI_SHELL
+extern struct process stm32_shell_process;
 #endif
 
 uint32_t idle_count = 0;
@@ -30,24 +35,33 @@ uint32_t idle_count = 0;
 int
 main()
 {
-	//dubug uart init
-	dbg_setup_uart();
-	clock_init();
-	//process init
-	process_init();
-	process_start(&etimer_process, NULL);
+    //dubug uart init
+    dbg_setup_uart();
+    clock_init();
 
-	/* with keil, can't use the AUTOSTART_PROCESSES to add the exmaple or it will be error
-	 * So in this project, start the process manual.
-	 */
-	#ifdef WITH_LED_BLINK
-	process_start(&blink_process, NULL);
-	#endif
-	while(1)
-	{
-			do{}
-			while(process_run()>0);
-			idle_count++;
-	}
+    //process init first
+    process_init();
+
+    uart1_set_input(serial_line_input_byte);
+    serial_line_init();
+
+    process_start(&etimer_process, NULL);
+
+    /* with keil, can't use the AUTOSTART_PROCESSES to add the exmaple or it will be error
+     * So in this project, start the process manual.
+     */
+#ifdef WITH_LED_BLINK
+    process_start(&blink_process, NULL);
+#endif
+#ifdef WITH_CONTIKI_SHELL
+    process_start(&stm32_shell_process, NULL);
+#endif
+
+    while(1)
+    {
+        do {}
+        while(process_run()>0);
+        idle_count++;
+    }
 }
 

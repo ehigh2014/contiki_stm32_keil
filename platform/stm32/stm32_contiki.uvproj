@@ -144,7 +144,7 @@
             <UsePdscDebugDescription>0</UsePdscDebugDescription>
           </Target>
           <RunDebugAfterBuild>0</RunDebugAfterBuild>
-          <TargetSelection>6</TargetSelection>
+          <TargetSelection>11</TargetSelection>
           <SimDlls>
             <CpuDll></CpuDll>
             <CpuDllArguments></CpuDllArguments>
@@ -158,7 +158,7 @@
             <PeripheralDll></PeripheralDll>
             <PeripheralDllArguments></PeripheralDllArguments>
             <InitializationFile></InitializationFile>
-            <Driver>Segger\JL2CM3.dll</Driver>
+            <Driver>STLink\ST-LINKIII-KEIL_SWO.dll</Driver>
           </TargetDlls>
         </DebugOption>
         <Utilities>
@@ -360,9 +360,9 @@
             <useXO>0</useXO>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>USE_STDPERIPH_DRIVER,STM32F10X_MD,WITH_LED_BLINK</Define>
+              <Define>USE_STDPERIPH_DRIVER,STM32F10X_MD,WITH_LED_BLINK,WITH_CONTIKI_SHELL</Define>
               <Undefine></Undefine>
-              <IncludePath>.;..\..\core\cfs;..\..\core\ctk\libconio;..\..\core\ctk;..\..\core\dev;..\..\core\lib\strncasecmp;..\..\core\lib;..\..\core\loader;..\..\core\net;..\..\core\net\mac;..\..\core\net\rpl;..\..\core\net\mac\contikimac;..\..\cpu\arm\stm32f103;..\..\core\sys;..\..\core;..\..\cpu\arm\stm32f103\STM32F10x_StdPeriph_Driver\inc;..\..\cpu\arm\common;..\stm32</IncludePath>
+              <IncludePath>.;..\..\core\cfs;..\..\core\ctk\libconio;..\..\core\ctk;..\..\core\dev;..\..\core\lib\strncasecmp;..\..\core\lib;..\..\core\loader;..\..\core\net;..\..\core\net\mac;..\..\core\net\rpl;..\..\core\net\mac\contikimac;..\..\cpu\arm\stm32f103;..\..\core\sys;..\..\core;..\..\cpu\arm\stm32f103\STM32F10x_StdPeriph_Driver\inc;..\..\cpu\arm\common;..\stm32;..\..\apps\shell;..\..\apps\serial-shell;.\dev</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -565,6 +565,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\core\lib\trickle-timer.c</FilePath>
             </File>
+            <File>
+              <FileName>serial-line.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\core\dev\serial-line.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -718,6 +723,16 @@
               <FileType>1</FileType>
               <FilePath>..\..\examples\stm32f10x\led_blink.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32_shell.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\examples\stm32f10x\stm32_shell.c</FilePath>
+            </File>
+            <File>
+              <FileName>shell_blink.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\examples\stm32f10x\shell_blink.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -733,6 +748,11 @@
               <FileType>1</FileType>
               <FilePath>.\stm32f10x_it.c</FilePath>
             </File>
+            <File>
+              <FileName>uart1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\dev\uart1.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -740,6 +760,23 @@
         </Group>
         <Group>
           <GroupName>apps</GroupName>
+          <Files>
+            <File>
+              <FileName>serial-shell.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\apps\serial-shell\serial-shell.c</FilePath>
+            </File>
+            <File>
+              <FileName>shell.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\apps\shell\shell.c</FilePath>
+            </File>
+            <File>
+              <FileName>shell-run.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\apps\shell\shell-run.c</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>CMSIS</GroupName>
