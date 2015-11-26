@@ -29,6 +29,9 @@ extern struct process blink_process;
 #ifdef WITH_CONTIKI_SHELL
 extern struct process stm32_shell_process;
 #endif
+#ifdef WITH_RTIMER_TEST
+extern struct process rtimer_ex_process;
+#endif
 
 uint32_t idle_count = 0;
 
@@ -38,7 +41,8 @@ main()
     //dubug uart init
     dbg_setup_uart();
     clock_init();
-
+		rtimer_init();
+	
     //process init first
     process_init();
 
@@ -56,7 +60,9 @@ main()
 #ifdef WITH_CONTIKI_SHELL
     process_start(&stm32_shell_process, NULL);
 #endif
-
+#ifdef WITH_RTIMER_TEST
+		process_start(&rtimer_ex_process, NULL);
+#endif
     while(1)
     {
         do {}

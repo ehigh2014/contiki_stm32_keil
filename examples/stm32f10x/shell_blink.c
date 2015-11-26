@@ -37,9 +37,9 @@ led_init()
 }
 
 /**
- * \brief  
- * \param 
- *      
+ * \brief
+ * \param
+ *
  */
 static void
 led_on()
@@ -78,7 +78,7 @@ PROCESS_THREAD(shell_blink_process, ev, data)
 void
 shell_blink_init(void)
 {
-	led_init();
+    led_init();
     shell_register_command(&blink_command);
 }
 

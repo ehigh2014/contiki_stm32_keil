@@ -360,7 +360,7 @@
             <useXO>0</useXO>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>USE_STDPERIPH_DRIVER,STM32F10X_MD,WITH_LED_BLINK,WITH_CONTIKI_SHELL</Define>
+              <Define>USE_STDPERIPH_DRIVER,STM32F10X_MD,WITH_LED_BLINK,WITH_CONTIKI_SHELL,WITH_RTIMER_TEST</Define>
               <Undefine></Undefine>
               <IncludePath>.;..\..\core\cfs;..\..\core\ctk\libconio;..\..\core\ctk;..\..\core\dev;..\..\core\lib\strncasecmp;..\..\core\lib;..\..\core\loader;..\..\core\net;..\..\core\net\mac;..\..\core\net\rpl;..\..\core\net\mac\contikimac;..\..\cpu\arm\stm32f103;..\..\core\sys;..\..\core;..\..\cpu\arm\stm32f103\STM32F10x_StdPeriph_Driver\inc;..\..\cpu\arm\common;..\stm32;..\..\apps\shell;..\..\apps\serial-shell;.\dev</IncludePath>
             </VariousControls>
@@ -732,6 +732,11 @@
               <FileName>shell_blink.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\examples\stm32f10x\shell_blink.c</FilePath>
+            </File>
+            <File>
+              <FileName>rtimer_example.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\examples\stm32f10x\rtimer_example.c</FilePath>
             </File>
           </Files>
         </Group>
