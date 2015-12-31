@@ -81,6 +81,28 @@ Section Cross References
     serial-line.o(.text) refers to process.o(.data) for process_current
     serial-line.o(.data) refers to serial-line.o(.conststring) for .conststring
     serial-line.o(.data) refers to serial-line.o(.text) for process_thread_serial_line_process
+    uip.o(.text) refers to uip.o(.data) for ipid
+    uip.o(.text) refers to uip.o(.bss) for uip_aligned_buf
+    uip.o(.text) refers to tcpip.o(.text) for tcpip_uipcall
+    uip.o(.text) refers to uip.o(.constdata) for uip_all_zeroes_addr
+    uip.o(.text) refers to memmovea.o(.text) for __aeabi_memcpy
+    uip_arp.o(.text) refers to memseta.o(.text) for __aeabi_memset
+    uip_arp.o(.text) refers to uip_arp.o(.data) for i
+    uip_arp.o(.text) refers to uip_arp.o(.bss) for arp_table
+    uip_arp.o(.text) refers to uip.o(.constdata) for uip_all_zeroes_addr
+    uip_arp.o(.text) refers to uip.o(.data) for uip_len
+    uip_arp.o(.text) refers to uip.o(.bss) for uip_aligned_buf
+    uip_arp.o(.text) refers to uip_arp.o(.constdata) for broadcast_ethaddr
+    tcpip.o(.text) refers to etimer.o(.text) for etimer_expired
+    tcpip.o(.text) refers to uip.o(.text) for uip_process
+    tcpip.o(.text) refers to process.o(.text) for process_post
+    tcpip.o(.text) refers to tcpip.o(.data) for outputfunc
+    tcpip.o(.text) refers to tcpip.o(.bss) for periodic
+    tcpip.o(.text) refers to uip.o(.bss) for uip_aligned_buf
+    tcpip.o(.text) refers to uip.o(.data) for uip_len
+    tcpip.o(.text) refers to process.o(.data) for process_current
+    tcpip.o(.data) refers to tcpip.o(.conststring) for .conststring
+    tcpip.o(.data) refers to tcpip.o(.text) for process_thread_tcpip_process
     clock.o(.text) refers to etimer.o(.text) for etimer_pending
     clock.o(.text) refers to clock.o(.data) for current_clock
     debug-uart.o(.text) refers to misc.o(.text) for NVIC_PriorityGroupConfig
@@ -106,6 +128,14 @@ Section Cross References
     rtimer-arch.o(.text) refers to rtimer.o(.text) for rtimer_run_next
     rtimer-arch.o(.text) refers to system_stm32f10x.o(.data) for SystemCoreClock
     rtimer-arch.o(.text) refers to rtimer-arch.o(.data) for CCR1_Val
+    enc28j60.o(.text) refers to enc28j160_arch.o(.text) for enc28j60_arch_spi_select
+    enc28j60.o(.text) refers to process.o(.text) for process_start
+    enc28j60.o(.text) refers to memseta.o(.text) for __aeabi_memclr4
+    enc28j60.o(.text) refers to etimer.o(.text) for etimer_set
+    enc28j60.o(.text) refers to enc28j60.o(.data) for enc_mac_addr
+    enc28j60.o(.text) refers to enc28j60.o(.bss) for et
+    enc28j60.o(.data) refers to enc28j60.o(.conststring) for .conststring
+    enc28j60.o(.data) refers to enc28j60.o(.text) for process_thread_enc_watchdog_process
     led_blink.o(.text) refers to stm32f10x_rcc.o(.text) for RCC_APB2PeriphClockCmd
     led_blink.o(.text) refers to stm32f10x_gpio.o(.text) for GPIO_Init
     led_blink.o(.text) refers to etimer.o(.text) for etimer_set
@@ -131,6 +161,10 @@ Section Cross References
     rtimer_example.o(.text) refers to rtimer_example.o(.bss) for ex_timer
     rtimer_example.o(.data) refers to rtimer_example.o(.conststring) for .conststring
     rtimer_example.o(.data) refers to rtimer_example.o(.text) for process_thread_rtimer_ex_process
+    stm32_enc_example.o(.text) refers to enc28j60.o(.text) for enc28j60_init
+    stm32_enc_example.o(.text) refers to uip.o(.text) for uip_init
+    stm32_enc_example.o(.text) refers to stm32_enc_example.o(.data) for ethernet_mac
+    stm32_enc_example.o(.text) refers to uip.o(.data) for uip_lladdr
     contiki-main.o(.text) refers to debug-uart.o(.text) for dbg_setup_uart
     contiki-main.o(.text) refers to clock.o(.text) for clock_init
     contiki-main.o(.text) refers to rtimer.o(.text) for rtimer_init
@@ -144,6 +178,9 @@ Section Cross References
     contiki-main.o(.text) refers to contiki-main.o(.data) for idle_count
     uart1.o(.text) refers to stm32f10x_usart.o(.text) for USART_GetITStatus
     uart1.o(.text) refers to uart1.o(.data) for uart1_input_handler
+    enc28j160_arch.o(.text) refers to stm32f10x_rcc.o(.text) for RCC_APB1PeriphClockCmd
+    enc28j160_arch.o(.text) refers to stm32f10x_gpio.o(.text) for GPIO_Init
+    enc28j160_arch.o(.text) refers to stm32f10x_spi.o(.text) for SPI_Init
     serial-shell.o(.text) refers to printf3.o(i.__0printf$3) for __2printf
     serial-shell.o(.text) refers to shell.o(.text) for shell_init
     serial-shell.o(.text) refers to strlen.o(.text) for strlen
@@ -512,6 +549,18 @@ Removing Unused input sections from the image.
     Removing random.o(.text), (22 bytes).
     Removing trickle-timer.o(.text), (612 bytes).
     Removing trickle-timer.o(.data), (8 bytes).
+    Removing uip.o(.text), (5024 bytes).
+    Removing uip.o(.bss), (1880 bytes).
+    Removing uip.o(.constdata), (8 bytes).
+    Removing uip.o(.data), (60 bytes).
+    Removing uip_arp.o(.text), (1060 bytes).
+    Removing uip_arp.o(.bss), (96 bytes).
+    Removing uip_arp.o(.constdata), (6 bytes).
+    Removing uip_arp.o(.data), (8 bytes).
+    Removing tcpip.o(.text), (1106 bytes).
+    Removing tcpip.o(.bss), (180 bytes).
+    Removing tcpip.o(.conststring), (13 bytes).
+    Removing tcpip.o(.data), (28 bytes).
     Removing stm32f10x_adc.o(.text), (1102 bytes).
     Removing stm32f10x_bkp.o(.text), (196 bytes).
     Removing stm32f10x_can.o(.text), (2540 bytes).
@@ -531,6 +580,13 @@ Removing Unused input sections from the image.
     Removing stm32f10x_spi.o(.text), (780 bytes).
     Removing stm32f10x_wwdg.o(.text), (136 bytes).
     Removing mtarch.o(.text), (16 bytes).
+    Removing enc28j60.o(.text), (1180 bytes).
+    Removing enc28j60.o(.bss), (16 bytes).
+    Removing enc28j60.o(.conststring), (18 bytes).
+    Removing enc28j60.o(.data), (34 bytes).
+    Removing stm32_enc_example.o(.text), (96 bytes).
+    Removing stm32_enc_example.o(.data), (12 bytes).
+    Removing enc28j160_arch.o(.text), (268 bytes).
     Removing shell-run.o(.text), (432 bytes).
     Removing shell-run.o(.conststring), (33 bytes).
     Removing shell-run.o(.data), (36 bytes).
@@ -543,7 +599,7 @@ Removing Unused input sections from the image.
     Removing cdrcmple.o(.text), (40 bytes).
     Removing depilogue.o(.text), (190 bytes).
 
-77 unused section(s) (total 27842 bytes) removed from the image.
+96 unused section(s) (total 38935 bytes) removed from the image.
 
 ==============================================================================
 
@@ -554,56 +610,56 @@ Image Symbol Table
     Symbol Name                              Value     Ov Type        Size  Object(Section)
 
     ../clib/../cmprslib/zerorunl2.c          0x00000000   Number         0  __dczerorl2.o ABSOLUTE
-    ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  iscntrl_o.o ABSOLUTE
-    ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  isdigit_o.o ABSOLUTE
     ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  isgraph_o.o ABSOLUTE
-    ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  islower_o.o ABSOLUTE
-    ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  isprint_o.o ABSOLUTE
-    ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  ispunct_o.o ABSOLUTE
-    ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  isspace_o.o ABSOLUTE
-    ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  isupper_o.o ABSOLUTE
-    ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  isxdigit_o.o ABSOLUTE
-    ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  ctype_o.o ABSOLUTE
-    ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  isalnum_o.o ABSOLUTE
-    ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  isalpha_o.o ABSOLUTE
+    ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  iscntrl_o.o ABSOLUTE
     ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  isblank_o.o ABSOLUTE
-    ../clib/microlib/division.c              0x00000000   Number         0  uidiv.o ABSOLUTE
+    ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  isalpha_o.o ABSOLUTE
+    ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  isalnum_o.o ABSOLUTE
+    ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  ctype_o.o ABSOLUTE
+    ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  isxdigit_o.o ABSOLUTE
+    ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  isupper_o.o ABSOLUTE
+    ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  isspace_o.o ABSOLUTE
+    ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  ispunct_o.o ABSOLUTE
+    ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  isprint_o.o ABSOLUTE
+    ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  islower_o.o ABSOLUTE
+    ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  isdigit_o.o ABSOLUTE
     ../clib/microlib/division.c              0x00000000   Number         0  uldiv.o ABSOLUTE
+    ../clib/microlib/division.c              0x00000000   Number         0  uidiv.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
-    ../clib/microlib/longlong.c              0x00000000   Number         0  llshl.o ABSOLUTE
-    ../clib/microlib/longlong.c              0x00000000   Number         0  llsshr.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
     ../clib/microlib/longlong.c              0x00000000   Number         0  llushr.o ABSOLUTE
+    ../clib/microlib/longlong.c              0x00000000   Number         0  llsshr.o ABSOLUTE
+    ../clib/microlib/longlong.c              0x00000000   Number         0  llshl.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf8.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf7.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf6.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf3.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf2.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf1.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf0.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf4.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printfb.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf1.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf2.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printfa.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf3.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf7.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf5.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf0.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf6.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf8.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printfa.o ABSOLUTE
     ../clib/microlib/printf/stubs.s          0x00000000   Number         0  stubs.o ABSOLUTE
     ../clib/microlib/stdio/streams.c         0x00000000   Number         0  stdout.o ABSOLUTE
     ../clib/microlib/stdlib/rand.c           0x00000000   Number         0  rand.o ABSOLUTE
     ../clib/microlib/string/memcmp.c         0x00000000   Number         0  memcmp.o ABSOLUTE
-    ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpyb.o ABSOLUTE
-    ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpya.o ABSOLUTE
     ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memmovea.o ABSOLUTE
+    ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpya.o ABSOLUTE
     ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memmoveb.o ABSOLUTE
+    ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpyb.o ABSOLUTE
     ../clib/microlib/string/memset.c         0x00000000   Number         0  memseta.o ABSOLUTE
     ../clib/microlib/string/strchr.c         0x00000000   Number         0  strchr.o ABSOLUTE
     ../clib/microlib/string/strcmp.c         0x00000000   Number         0  strcmp.o ABSOLUTE
@@ -636,6 +692,9 @@ Image Symbol Table
     ..\..\core\lib\ringbuf.c                 0x00000000   Number         0  ringbuf.o ABSOLUTE
     ..\..\core\lib\settings.c                0x00000000   Number         0  settings.o ABSOLUTE
     ..\..\core\lib\trickle-timer.c           0x00000000   Number         0  trickle-timer.o ABSOLUTE
+    ..\..\core\net\ip\tcpip.c                0x00000000   Number         0  tcpip.o ABSOLUTE
+    ..\..\core\net\ipv4\uip.c                0x00000000   Number         0  uip.o ABSOLUTE
+    ..\..\core\net\ipv4\uip_arp.c            0x00000000   Number         0  uip_arp.o ABSOLUTE
     ..\..\core\net\linkaddr.c                0x00000000   Number         0  linkaddr.o ABSOLUTE
     ..\..\core\net\nbr-table.c               0x00000000   Number         0  nbr-table.o ABSOLUTE
     ..\..\core\net\packetbuf.c               0x00000000   Number         0  packetbuf.o ABSOLUTE
@@ -681,14 +740,17 @@ Image Symbol Table
     ..\..\cpu\arm\stm32f103\rtimer-arch.c    0x00000000   Number         0  rtimer-arch.o ABSOLUTE
     ..\..\cpu\arm\stm32f103\startup\MDK-ARM\startup_stm32f10x_hd.s 0x00000000   Number         0  startup_stm32f10x_hd.o ABSOLUTE
     ..\..\cpu\arm\stm32f103\system_stm32f10x.c 0x00000000   Number         0  system_stm32f10x.o ABSOLUTE
+    ..\..\dev\enc28j60\enc28j60.c            0x00000000   Number         0  enc28j60.o ABSOLUTE
     ..\..\examples\stm32f10x\led_blink.c     0x00000000   Number         0  led_blink.o ABSOLUTE
     ..\..\examples\stm32f10x\rtimer_example.c 0x00000000   Number         0  rtimer_example.o ABSOLUTE
     ..\..\examples\stm32f10x\shell_blink.c   0x00000000   Number         0  shell_blink.o ABSOLUTE
+    ..\..\examples\stm32f10x\stm32_enc_example.c 0x00000000   Number         0  stm32_enc_example.o ABSOLUTE
     ..\..\examples\stm32f10x\stm32_shell.c   0x00000000   Number         0  stm32_shell.o ABSOLUTE
     ..\\..\\cpu\\arm\\stm32f103\\core_cm3.c  0x00000000   Number         0  core_cm3.o ABSOLUTE
     cdrcmple.s                               0x00000000   Number         0  cdrcmple.o ABSOLUTE
     contiki-main.c                           0x00000000   Number         0  contiki-main.o ABSOLUTE
     dc.s                                     0x00000000   Number         0  dc.o ABSOLUTE
+    dev\enc28j160_arch.c                     0x00000000   Number         0  enc28j160_arch.o ABSOLUTE
     dev\uart1.c                              0x00000000   Number         0  uart1.o ABSOLUTE
     handlers.s                               0x00000000   Number         0  handlers.o ABSOLUTE
     init.s                                   0x00000000   Number         0  init.o ABSOLUTE
@@ -1309,16 +1371,16 @@ Memory Map of the image
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x08000000   0x00000130   Data   RO         1743    RESET               startup_stm32f10x_hd.o
-    0x08000130   0x00000000   Code   RO         1748  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
-    0x08000130   0x00000004   Code   RO         2063    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
-    0x08000134   0x00000004   Code   RO         2066    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
-    0x08000138   0x00000000   Code   RO         2068    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
-    0x08000138   0x00000000   Code   RO         2070    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
-    0x08000138   0x00000008   Code   RO         2071    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
-    0x08000140   0x00000000   Code   RO         2073    .ARM.Collect$$$$0000000D  mc_w.l(entry10a.o)
-    0x08000140   0x00000000   Code   RO         2075    .ARM.Collect$$$$0000000F  mc_w.l(entry11a.o)
-    0x08000140   0x00000004   Code   RO         2064    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
+    0x08000000   0x00000130   Data   RO         1912    RESET               startup_stm32f10x_hd.o
+    0x08000130   0x00000000   Code   RO         1917  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
+    0x08000130   0x00000004   Code   RO         2232    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
+    0x08000134   0x00000004   Code   RO         2235    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
+    0x08000138   0x00000000   Code   RO         2237    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
+    0x08000138   0x00000000   Code   RO         2239    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
+    0x08000138   0x00000008   Code   RO         2240    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
+    0x08000140   0x00000000   Code   RO         2242    .ARM.Collect$$$$0000000D  mc_w.l(entry10a.o)
+    0x08000140   0x00000000   Code   RO         2244    .ARM.Collect$$$$0000000F  mc_w.l(entry11a.o)
+    0x08000140   0x00000004   Code   RO         2233    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
     0x08000144   0x00000260   Code   RO          177    .text               etimer.o
     0x080003a4   0x00000348   Code   RO          216    .text               process.o
     0x080006ec   0x00000074   Code   RO          239    .text               rtimer.o
@@ -1327,53 +1389,53 @@ Memory Map of the image
     0x080008c8   0x00000076   Code   RO          793    .text               ringbuf.o
     0x0800093e   0x00000002   PAD
     0x08000940   0x00000138   Code   RO          837    .text               serial-line.o
-    0x08000a78   0x000000b8   Code   RO          857    .text               clock.o
-    0x08000b30   0x000000dc   Code   RO          960    .text               debug-uart.o
-    0x08000c0c   0x000000dc   Code   RO          976    .text               misc.o
-    0x08000ce8   0x00000358   Code   RO         1216    .text               stm32f10x_gpio.o
-    0x08001040   0x000003a4   Code   RO         1270    .text               stm32f10x_rcc.o
-    0x080013e4   0x00000e1a   Code   RO         1329    .text               stm32f10x_tim.o
+    0x08000a78   0x000000b8   Code   RO          976    .text               clock.o
+    0x08000b30   0x000000dc   Code   RO         1079    .text               debug-uart.o
+    0x08000c0c   0x000000dc   Code   RO         1095    .text               misc.o
+    0x08000ce8   0x00000358   Code   RO         1335    .text               stm32f10x_gpio.o
+    0x08001040   0x000003a4   Code   RO         1389    .text               stm32f10x_rcc.o
+    0x080013e4   0x00000e1a   Code   RO         1448    .text               stm32f10x_tim.o
     0x080021fe   0x00000002   PAD
-    0x08002200   0x00000408   Code   RO         1344    .text               stm32f10x_usart.o
-    0x08002608   0x00000128   Code   RO         1383    .text               rtimer-arch.o
-    0x08002730   0x000000ac   Code   RO         1397    .text               led_blink.o
-    0x080027dc   0x00000028   Code   RO         1421    .text               stm32_shell.o
-    0x08002804   0x000000b4   Code   RO         1552    .text               shell_blink.o
-    0x080028b8   0x000000b4   Code   RO         1571    .text               rtimer_example.o
-    0x0800296c   0x0000006c   Code   RO         1590    .text               contiki-main.o
-    0x080029d8   0x00000018   Code   RO         1616    .text               stm32f10x_it.o
-    0x080029f0   0x00000040   Code   RO         1631    .text               uart1.o
-    0x08002a30   0x000000e8   Code   RO         1648    .text               serial-shell.o
-    0x08002b18   0x00000868   Code   RO         1672    .text               shell.o
-    0x08003380   0x000001dc   Code   RO         1723    .text               system_stm32f10x.o
-    0x0800355c   0x00000024   Code   RO         1744    .text               startup_stm32f10x_hd.o
-    0x08003580   0x00000008   Code   RO         1751    .text               mc_w.l(ctype_o.o)
-    0x08003588   0x00000014   Code   RO         1788    .text               mc_w.l(strchr.o)
-    0x0800359c   0x0000000e   Code   RO         1790    .text               mc_w.l(strlen.o)
-    0x080035aa   0x0000001c   Code   RO         1792    .text               mc_w.l(strcmp.o)
-    0x080035c6   0x0000001e   Code   RO         1796    .text               mc_w.l(strncmp.o)
-    0x080035e4   0x0000002c   Code   RO         2078    .text               mc_w.l(uidiv.o)
-    0x08003610   0x00000024   Code   RO         2093    .text               mc_w.l(init.o)
-    0x08003634   0x0000005c   Code   RO         2111    .text               mc_w.l(__dczerorl2.o)
-    0x08003690   0x00000020   Code   RO         1891    i.__0printf$3       mc_w.l(printf3.o)
-    0x080036b0   0x0000000e   Code   RO         2105    i.__scatterload_copy  mc_w.l(handlers.o)
-    0x080036be   0x00000002   Code   RO         2106    i.__scatterload_null  mc_w.l(handlers.o)
-    0x080036c0   0x0000000e   Code   RO         2107    i.__scatterload_zeroinit  mc_w.l(handlers.o)
+    0x08002200   0x00000408   Code   RO         1463    .text               stm32f10x_usart.o
+    0x08002608   0x00000128   Code   RO         1502    .text               rtimer-arch.o
+    0x08002730   0x000000ac   Code   RO         1539    .text               led_blink.o
+    0x080027dc   0x00000028   Code   RO         1563    .text               stm32_shell.o
+    0x08002804   0x000000b4   Code   RO         1694    .text               shell_blink.o
+    0x080028b8   0x000000b4   Code   RO         1710    .text               rtimer_example.o
+    0x0800296c   0x0000006c   Code   RO         1747    .text               contiki-main.o
+    0x080029d8   0x00000018   Code   RO         1773    .text               stm32f10x_it.o
+    0x080029f0   0x00000040   Code   RO         1788    .text               uart1.o
+    0x08002a30   0x000000e8   Code   RO         1817    .text               serial-shell.o
+    0x08002b18   0x00000868   Code   RO         1841    .text               shell.o
+    0x08003380   0x000001dc   Code   RO         1892    .text               system_stm32f10x.o
+    0x0800355c   0x00000024   Code   RO         1913    .text               startup_stm32f10x_hd.o
+    0x08003580   0x00000008   Code   RO         1920    .text               mc_w.l(ctype_o.o)
+    0x08003588   0x00000014   Code   RO         1957    .text               mc_w.l(strchr.o)
+    0x0800359c   0x0000000e   Code   RO         1959    .text               mc_w.l(strlen.o)
+    0x080035aa   0x0000001c   Code   RO         1961    .text               mc_w.l(strcmp.o)
+    0x080035c6   0x0000001e   Code   RO         1965    .text               mc_w.l(strncmp.o)
+    0x080035e4   0x0000002c   Code   RO         2247    .text               mc_w.l(uidiv.o)
+    0x08003610   0x00000024   Code   RO         2262    .text               mc_w.l(init.o)
+    0x08003634   0x0000005c   Code   RO         2280    .text               mc_w.l(__dczerorl2.o)
+    0x08003690   0x00000020   Code   RO         2060    i.__0printf$3       mc_w.l(printf3.o)
+    0x080036b0   0x0000000e   Code   RO         2274    i.__scatterload_copy  mc_w.l(handlers.o)
+    0x080036be   0x00000002   Code   RO         2275    i.__scatterload_null  mc_w.l(handlers.o)
+    0x080036c0   0x0000000e   Code   RO         2276    i.__scatterload_zeroinit  mc_w.l(handlers.o)
     0x080036ce   0x00000002   PAD
-    0x080036d0   0x000001b8   Code   RO         1898    i._printf_core      mc_w.l(printf3.o)
-    0x08003888   0x00000081   Data   RO         1752    .constdata          mc_w.l(ctype_o.o)
+    0x080036d0   0x000001b8   Code   RO         2067    i._printf_core      mc_w.l(printf3.o)
+    0x08003888   0x00000081   Data   RO         1921    .constdata          mc_w.l(ctype_o.o)
     0x08003909   0x00000003   PAD
-    0x0800390c   0x00000004   Data   RO         1753    .constdata          mc_w.l(ctype_o.o)
+    0x0800390c   0x00000004   Data   RO         1922    .constdata          mc_w.l(ctype_o.o)
     0x08003910   0x0000000c   Data   RO          178    .conststring        etimer.o
     0x0800391c   0x0000000e   Data   RO          839    .conststring        serial-line.o
-    0x0800392a   0x00000006   Data   RO         1399    .conststring        led_blink.o
-    0x08003930   0x00000014   Data   RO         1422    .conststring        stm32_shell.o
-    0x08003944   0x00000026   Data   RO         1553    .conststring        shell_blink.o
-    0x0800396a   0x0000000f   Data   RO         1573    .conststring        rtimer_example.o
-    0x08003979   0x00000015   Data   RO         1649    .conststring        serial-shell.o
-    0x0800398e   0x000000d5   Data   RO         1674    .conststring        shell.o
+    0x0800392a   0x00000006   Data   RO         1541    .conststring        led_blink.o
+    0x08003930   0x00000014   Data   RO         1564    .conststring        stm32_shell.o
+    0x08003944   0x00000026   Data   RO         1695    .conststring        shell_blink.o
+    0x0800396a   0x0000000f   Data   RO         1712    .conststring        rtimer_example.o
+    0x08003979   0x00000015   Data   RO         1818    .conststring        serial-shell.o
+    0x0800398e   0x000000d5   Data   RO         1843    .conststring        shell.o
     0x08003a63   0x00000001   PAD
-    0x08003a64   0x00000020   Data   RO         2103    Region$$Table       anon$$obj.o
+    0x08003a64   0x00000020   Data   RO         2272    Region$$Table       anon$$obj.o
 
 
     Execution Region RW_IRAM1 (Base: 0x20000000, Size: 0x000008f0, Max: 0x00005000, ABSOLUTE, COMPRESSED[0x000000e8])
@@ -1388,27 +1450,27 @@ Memory Map of the image
     0x2000003e   0x00000002   PAD
     0x20000040   0x00000021   Data   RW          840    .data               serial-line.o
     0x20000061   0x00000003   PAD
-    0x20000064   0x0000000c   Data   RW          858    .data               clock.o
-    0x20000070   0x00000014   Data   RW         1271    .data               stm32f10x_rcc.o
-    0x20000084   0x00000002   Data   RW         1384    .data               rtimer-arch.o
+    0x20000064   0x0000000c   Data   RW          977    .data               clock.o
+    0x20000070   0x00000014   Data   RW         1390    .data               stm32f10x_rcc.o
+    0x20000084   0x00000002   Data   RW         1503    .data               rtimer-arch.o
     0x20000086   0x00000002   PAD
-    0x20000088   0x00000011   Data   RW         1400    .data               led_blink.o
+    0x20000088   0x00000011   Data   RW         1542    .data               led_blink.o
     0x20000099   0x00000003   PAD
-    0x2000009c   0x00000010   Data   RW         1423    .data               stm32_shell.o
-    0x200000ac   0x00000024   Data   RW         1554    .data               shell_blink.o
-    0x200000d0   0x00000010   Data   RW         1574    .data               rtimer_example.o
-    0x200000e0   0x00000004   Data   RW         1591    .data               contiki-main.o
-    0x200000e4   0x00000004   Data   RW         1632    .data               uart1.o
-    0x200000e8   0x00000010   Data   RW         1650    .data               serial-shell.o
-    0x200000f8   0x00000134   Data   RW         1675    .data               shell.o
-    0x2000022c   0x00000014   Data   RW         1724    .data               system_stm32f10x.o
-    0x20000240   0x00000004   Data   RW         2077    .data               mc_w.l(stdout.o)
+    0x2000009c   0x00000010   Data   RW         1565    .data               stm32_shell.o
+    0x200000ac   0x00000024   Data   RW         1696    .data               shell_blink.o
+    0x200000d0   0x00000010   Data   RW         1713    .data               rtimer_example.o
+    0x200000e0   0x00000004   Data   RW         1748    .data               contiki-main.o
+    0x200000e4   0x00000004   Data   RW         1789    .data               uart1.o
+    0x200000e8   0x00000010   Data   RW         1819    .data               serial-shell.o
+    0x200000f8   0x00000134   Data   RW         1844    .data               shell.o
+    0x2000022c   0x00000014   Data   RW         1893    .data               system_stm32f10x.o
+    0x20000240   0x00000004   Data   RW         2246    .data               mc_w.l(stdout.o)
     0x20000244   0x00000180   Zero   RW          217    .bss                process.o
     0x200003c4   0x00000100   Zero   RW          838    .bss                serial-line.o
-    0x200004c4   0x00000010   Zero   RW         1398    .bss                led_blink.o
-    0x200004d4   0x0000000c   Zero   RW         1572    .bss                rtimer_example.o
-    0x200004e0   0x00000010   Zero   RW         1673    .bss                shell.o
-    0x200004f0   0x00000400   Zero   RW         1741    STACK               startup_stm32f10x_hd.o
+    0x200004c4   0x00000010   Zero   RW         1540    .bss                led_blink.o
+    0x200004d4   0x0000000c   Zero   RW         1711    .bss                rtimer_example.o
+    0x200004e0   0x00000010   Zero   RW         1842    .bss                shell.o
+    0x200004f0   0x00000400   Zero   RW         1910    STACK               startup_stm32f10x_hd.o
 
 
 ==============================================================================

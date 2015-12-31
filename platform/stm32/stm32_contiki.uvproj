@@ -362,7 +362,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F10X_MD,WITH_LED_BLINK,WITH_CONTIKI_SHELL,WITH_RTIMER_TEST</Define>
               <Undefine></Undefine>
-              <IncludePath>.;..\..\core\cfs;..\..\core\ctk\libconio;..\..\core\ctk;..\..\core\dev;..\..\core\lib\strncasecmp;..\..\core\lib;..\..\core\loader;..\..\core\net;..\..\core\net\mac;..\..\core\net\rpl;..\..\core\net\mac\contikimac;..\..\cpu\arm\stm32f103;..\..\core\sys;..\..\core;..\..\cpu\arm\stm32f103\STM32F10x_StdPeriph_Driver\inc;..\..\cpu\arm\common;..\stm32;..\..\apps\shell;..\..\apps\serial-shell;.\dev</IncludePath>
+              <IncludePath>.;..\..\core\cfs;..\..\core\ctk\libconio;..\..\core\ctk;..\..\core\dev;..\..\core\lib\strncasecmp;..\..\core\lib;..\..\core\loader;..\..\core\net;..\..\core\net\mac;..\..\core\net\rpl;..\..\core\net\mac\contikimac;..\..\cpu\arm\stm32f103;..\..\core\sys;..\..\core;..\..\cpu\arm\stm32f103\STM32F10x_StdPeriph_Driver\inc;..\..\cpu\arm\common;..\stm32;..\..\apps\shell;..\..\apps\serial-shell;.\dev;..\..\dev\enc28j60;..\..\core\net\ipv4;..\..\core\net\ip</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -570,6 +570,21 @@
               <FileType>1</FileType>
               <FilePath>..\..\core\dev\serial-line.c</FilePath>
             </File>
+            <File>
+              <FileName>uip.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\core\net\ipv4\uip.c</FilePath>
+            </File>
+            <File>
+              <FileName>uip_arp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\core\net\ipv4\uip_arp.c</FilePath>
+            </File>
+            <File>
+              <FileName>tcpip.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\core\net\ip\tcpip.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -714,6 +729,13 @@
         </Group>
         <Group>
           <GroupName>dev</GroupName>
+          <Files>
+            <File>
+              <FileName>enc28j60.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\dev\enc28j60\enc28j60.c</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>examples</GroupName>
@@ -738,6 +760,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\examples\stm32f10x\rtimer_example.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32_enc_example.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\examples\stm32f10x\stm32_enc_example.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -757,6 +784,11 @@
               <FileName>uart1.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\dev\uart1.c</FilePath>
+            </File>
+            <File>
+              <FileName>enc28j160_arch.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\dev\enc28j160_arch.c</FilePath>
             </File>
           </Files>
         </Group>

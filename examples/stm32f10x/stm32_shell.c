@@ -20,7 +20,6 @@
 PROCESS(stm32_shell_process, "STM32 Contiki Shell");
 
 extern void shell_blink_init(void);
-extern void shell_range_init(void);
 
 PROCESS_THREAD(stm32_shell_process, ev, data)
 {
@@ -29,7 +28,6 @@ PROCESS_THREAD(stm32_shell_process, ev, data)
     serial_shell_init();
 		/* add the shell blink command */
     shell_blink_init();
-		shell_range_init();
     PROCESS_END();
 }
 

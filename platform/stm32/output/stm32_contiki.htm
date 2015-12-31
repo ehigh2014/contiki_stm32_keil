@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\output\stm32_contiki.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\output\stm32_contiki.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5.03 [Build 76]: Last Updated: Thu Nov 26 12:52:42 2015
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5.03 [Build 76]: Last Updated: Thu Dec 31 16:30:11 2015
 <BR><P>
 <H3>Maximum Stack Usage =        248 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -154,8 +154,8 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;timer_set
 <LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;add_timer
 </UL>
-<BR>[Called By]<UL><LI><a href="#[8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;process_thread_shell_server_process
-<LI><a href="#[2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;process_thread_blink_process
+<BR>[Called By]<UL><LI><a href="#[2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;process_thread_blink_process
+<LI><a href="#[8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;process_thread_shell_server_process
 </UL>
 
 <P><STRONG><a name="[66]"></a>etimer_reset_with_new_interval</STRONG> (Thumb, 22 bytes, Stack size 16 bytes, etimer.o(.text), UNUSED)
@@ -237,10 +237,10 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;process_post_synch
 </UL>
 <BR>[Called By]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;serial_line_init
+<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;serial_shell_init
 <LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;start_command
 <LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;shell_init
 <LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;serial_shell_init
 </UL>
 
 <P><STRONG><a name="[74]"></a>process_exit</STRONG> (Thumb, 16 bytes, Stack size 8 bytes, process.o(.text))
@@ -519,9 +519,9 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = GPIO_Init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dbg_setup_uart
+<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;blink_led_init
 <LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;led_init
 <LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;led_init
-<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;blink_led_init
 </UL>
 
 <P><STRONG><a name="[101]"></a>GPIO_StructInit</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, stm32f10x_gpio.o(.text), UNUSED)
@@ -535,15 +535,15 @@ Global Symbols
 <P><STRONG><a name="[105]"></a>GPIO_ReadOutputData</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, stm32f10x_gpio.o(.text), UNUSED)
 
 <P><STRONG><a name="[bc]"></a>GPIO_SetBits</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f10x_gpio.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;led_on
+<BR><BR>[Called By]<UL><LI><a href="#[2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;process_thread_blink_process
+<LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;led_on
 <LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;led_on
-<LI><a href="#[2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;process_thread_blink_process
 </UL>
 
 <P><STRONG><a name="[bd]"></a>GPIO_ResetBits</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f10x_gpio.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;led_off
+<BR><BR>[Called By]<UL><LI><a href="#[2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;process_thread_blink_process
+<LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;led_off
 <LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;led_off
-<LI><a href="#[2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;process_thread_blink_process
 </UL>
 
 <P><STRONG><a name="[106]"></a>GPIO_WriteBit</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, stm32f10x_gpio.o(.text), UNUSED)
@@ -616,9 +616,9 @@ Global Symbols
 
 <P><STRONG><a name="[8c]"></a>RCC_APB2PeriphClockCmd</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32f10x_rcc.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dbg_setup_uart
+<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;blink_led_init
 <LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;led_init
 <LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;led_init
-<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;blink_led_init
 </UL>
 
 <P><STRONG><a name="[b0]"></a>RCC_APB1PeriphClockCmd</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32f10x_rcc.o(.text))
@@ -1139,9 +1139,9 @@ Global Symbols
 <P><STRONG><a name="[d2]"></a>shell_output_str</STRONG> (Thumb, 80 bytes, Stack size 32 bytes, shell.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = shell_output_str &rArr; input_to_child_command &rArr; process_post_synch &rArr; call_process &rArr; exit_process &rArr;  call_process (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;input_to_child_command
+<BR>[Calls]<UL><LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
+<LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;input_to_child_command
 <LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;shell_default_output
-<LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
 </UL>
 <BR>[Called By]<UL><LI><a href="#[e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;shell_start
 <LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;start_command
@@ -1186,8 +1186,8 @@ Global Symbols
 <LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;list_push
 <LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strcmp
 </UL>
-<BR>[Called By]<UL><LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;shell_init
-<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;shell_blink_init
+<BR>[Called By]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;shell_blink_init
+<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;shell_init
 </UL>
 
 <P><STRONG><a name="[df]"></a>shell_time</STRONG> (Thumb, 14 bytes, Stack size 8 bytes, shell.o(.text))
@@ -1646,10 +1646,10 @@ Local Symbols
 <P><STRONG><a name="[4]"></a>process_thread_shell_blink_process</STRONG> (Thumb, 72 bytes, Stack size 24 bytes, shell_blink.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = process_thread_shell_blink_process &rArr; __2printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;led_off
-<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;led_on
-<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+<BR>[Calls]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 <LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strcmp
+<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;led_off
+<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;led_on
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> shell_blink.o(.data)
 </UL>
@@ -1689,9 +1689,9 @@ Local Symbols
 <P><STRONG><a name="[6]"></a>process_thread_serial_shell_process</STRONG> (Thumb, 88 bytes, Stack size 24 bytes, serial-shell.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = process_thread_serial_shell_process &rArr; shell_input &rArr; process_post_synch &rArr; call_process &rArr; exit_process &rArr;  call_process (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;shell_input
+<BR>[Calls]<UL><LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
+<LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;shell_input
 <LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;shell_init
-<LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> serial-shell.o(.data)
 </UL>
@@ -1745,10 +1745,10 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;process_is_running
 <LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;list_head
-<LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;shell_output_str
-<LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;command_kill
 <LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strcmp
 <LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
+<LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;shell_output_str
+<LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;command_kill
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> shell.o(.data)
 </UL>
@@ -1782,14 +1782,14 @@ Local Symbols
 <BR>[Calls]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;process_is_running
 <LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;list_head
 <LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;process_start
+<LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strncmp
+<LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
+<LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strchr
 <LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;shell_output_str
 <LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;start_command
 <LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;find_pipe
 <LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;replace_braces
 <LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;command_kill
-<LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strncmp
-<LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
-<LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strchr
 </UL>
 <BR>[Called By]<UL><LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;shell_start_command
 <LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;start_command
