@@ -144,7 +144,7 @@
             <UsePdscDebugDescription>0</UsePdscDebugDescription>
           </Target>
           <RunDebugAfterBuild>0</RunDebugAfterBuild>
-          <TargetSelection>11</TargetSelection>
+          <TargetSelection>6</TargetSelection>
           <SimDlls>
             <CpuDll></CpuDll>
             <CpuDllArguments></CpuDllArguments>
@@ -158,7 +158,7 @@
             <PeripheralDll></PeripheralDll>
             <PeripheralDllArguments></PeripheralDllArguments>
             <InitializationFile></InitializationFile>
-            <Driver>STLink\ST-LINKIII-KEIL_SWO.dll</Driver>
+            <Driver>Segger\JL2CM3.dll</Driver>
           </TargetDlls>
         </DebugOption>
         <Utilities>
@@ -360,7 +360,7 @@
             <useXO>0</useXO>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>USE_STDPERIPH_DRIVER,STM32F10X_MD,WITH_LED_BLINK,WITH_CONTIKI_SHELL,WITH_RTIMER_TEST</Define>
+              <Define>USE_STDPERIPH_DRIVER,STM32F10X_MD,WITH_LED_BLINK,WITH_CONTIKI_SHELL,WITH_RTIMER_TEST,WITH_ENC_EX_TEST</Define>
               <Undefine></Undefine>
               <IncludePath>.;..\..\core\cfs;..\..\core\ctk\libconio;..\..\core\ctk;..\..\core\dev;..\..\core\lib\strncasecmp;..\..\core\lib;..\..\core\loader;..\..\core\net;..\..\core\net\mac;..\..\core\net\rpl;..\..\core\net\mac\contikimac;..\..\cpu\arm\stm32f103;..\..\core\sys;..\..\core;..\..\cpu\arm\stm32f103\STM32F10x_StdPeriph_Driver\inc;..\..\cpu\arm\common;..\stm32;..\..\apps\shell;..\..\apps\serial-shell;.\dev;..\..\dev\enc28j60;..\..\core\net\ipv4;..\..\core\net\ip</IncludePath>
             </VariousControls>
