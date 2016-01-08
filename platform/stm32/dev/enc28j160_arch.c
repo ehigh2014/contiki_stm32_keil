@@ -115,19 +115,42 @@ enc28j60_arch_spi_init(void)
 uint8_t
 enc28j60_arch_spi_write(uint8_t dat)
 {
-//		while((ENC_SPI->SR & SPI_I2S_FLAG_TXE) == (uint16_t)RESET);
+		while(SPI_I2S_GetFlagStatus(ENC_SPI, SPI_I2S_FLAG_TXE) == RESET)
+		{}
     ENC_SPI->DR = dat;
     /* Wait for SPI Tx buffer empty */
     while((ENC_SPI->SR & SPI_I2S_FLAG_RXNE) == (uint16_t)RESET);
-    return ENC_SPI->DR;
+    return (uint8_t)SPI_I2S_ReceiveData(ENC_SPI);
 }
 
+uint8_t
+enc28j60_arch_spi_rw(uint8_t dat)
+{
+    /*!< Wait until the transmit buffer is empty */
+    while (SPI_I2S_GetFlagStatus(ENC_SPI, SPI_I2S_FLAG_TXE) == RESET)
+    {
+    }
+    /*!< Send the byte */
+    SPI_I2S_SendData(ENC_SPI, dat);
+    
+    /*!< Wait until a data is received */
+    while (SPI_I2S_GetFlagStatus(ENC_SPI, SPI_I2S_FLAG_RXNE) == RESET)
+    {
+    }
+    /*!< Get the received data */
+    dat = SPI_I2S_ReceiveData(ENC_SPI);
+    
+    /*!< Return the shifted data */
+    return dat;
+}
+
+#pragma O3
 uint8_t
 enc28j60_arch_spi_read(void)
 {
     uint8_t dat;
 //		while((ENC_SPI->SR & SPI_I2S_FLAG_TXE) == (uint16_t)RESET);
-    ENC_SPI->DR = 0;
+    ENC_SPI->DR = 0xFF;
     /* Wait for SPI Rx */
     while((ENC_SPI->SR & SPI_I2S_FLAG_RXNE) == (uint16_t)RESET);
     dat = ENC_SPI->DR;

@@ -49,6 +49,7 @@ void enc28j60_arch_spi_select(void);
 void enc28j60_arch_spi_deselect(void);
 void enc28j60_arch_enc_rst(uint8_t t);
 void enc28j60_arch_irq_process(void);
+uint8_t enc28j60_arch_spi_rw(uint8_t dat);
 
 
 /**************************************************************************************

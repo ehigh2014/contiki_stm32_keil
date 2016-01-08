@@ -121,6 +121,7 @@ static void
 writedatabyte(uint8_t byte)
 {
     enc28j60_arch_spi_select();
+    _delay_us(10);
     /* The Write Buffer Memory (WBM) command is 0 1 1 1 1 0 1 0  */
     enc28j60_arch_spi_write(ENC28J60_WRITE_BUF_MEM);
     enc28j60_arch_spi_write(byte);
@@ -131,6 +132,7 @@ static void
 writedata(uint8_t *data, int datalen)
 {
     enc28j60_arch_spi_select();
+    _delay_us(10);
     /* The Write Buffer Memory (WBM) command is 0 1 1 1 1 0 1 0  */
     enc28j60_arch_spi_write(ENC28J60_WRITE_BUF_MEM);
     while(datalen--)
@@ -162,7 +164,7 @@ readdata(uint8_t *buf, int len)
     {
         *buf++ = enc28j60_arch_spi_read();
     }
-    *buf = '\0';
+//    *buf = '\0';
     enc28j60_arch_spi_deselect();
     return len;
 }
@@ -205,6 +207,24 @@ softreset(void)
     /* The System Command (soft reset) is 1 1 1 1 1 1 1 1 */
     enc28j60_arch_spi_write(0xff);
     enc28j60_arch_spi_deselect();
+}
+
+uint32_t enc28j60_interrupt_disable()
+{
+    uint32_t level;
+    /* switch to bank 0 */
+    setregbank(EIE);
+    /* get last interrupt level */
+    level = readreg(EIE);
+    /* disable interrutps */
+    enc_write_op(ENC28J60_BIT_FIELD_CLR, EIE, level);
+    return level;
+}
+
+void enc28j60_interrupt_enable(uint32_t level)
+{
+    setregbank(EIE);
+    enc_write_op(ENC28J60_BIT_FIELD_SET, EIE, level);
 }
 
 void enc28j60_clkout(uint8_t clk)
@@ -285,7 +305,7 @@ reset(void)
     */
 
 //  /* Wait for OST , always waiting */
-//  while((readreg(ESTAT) & ESTAT_CLKRDY) == 0);
+    while((readreg(ESTAT) & ESTAT_CLKRDY) == 0);
 
     softreset();
     delay_ms(50);
@@ -315,7 +335,8 @@ reset(void)
     /* XXX: can't seem to get the unicast filter to work right now,
        using promiscous mode for now. */
 //    writereg(ERXFCON, 0);
-    writereg(ERXFCON, ERXFCON_UCEN | ERXFCON_CRCEN | ERXFCON_BCEN);
+//    writereg(ERXFCON, ERXFCON_UCEN | ERXFCON_CRCEN | ERXFCON_BCEN);
+    writereg(ERXFCON, ERXFCON_UCEN | ERXFCON_CRCEN | ERXFCON_PMEN);
     writereg(EPMM0, 0x3F);
     writereg(EPMM1, 0x30);
     writereg(EPMCSL, 0xF9);
@@ -372,26 +393,26 @@ reset(void)
     */
     /* Pull MAC out of reset */
     /* Turn on reception and IEEE-defined flow control */
-    writereg(MACON1, readreg(MACON1) | (MACON1_MARXEN + MACON1_TXPAUS +
-                                        MACON1_RXPAUS));
-
+//    writereg(MACON1, readreg(MACON1) | (MACON1_MARXEN + MACON1_TXPAUS +
+//                                        MACON1_RXPAUS));
+		writereg(MACON1, MACON1_MARXEN | MACON1_TXPAUS | MACON1_RXPAUS);
     writereg(MACON2, 0);//readreg(MACON2) & (~MACON2_MARST));
 
     enc_write_op(ENC28J60_BIT_FIELD_SET, MACON3, MACON3_PADCFG0|MACON3_TXCRCEN|MACON3_FRMLNEN|MACON3_FULDPX);
 
+    /* Set non-back-to-back packet gap */
+    writereg(MAIPGL, 0x12);
+    writereg(MAIPGH, 0x0c);
+
+    /* Set back-to-back inter packet gap */
+    writereg(MABBIPG, 0x15);
     /* Don't modify MACON4 */
     /* Set maximum frame length in MAMXFL */
     writereg(MAMXFLL, MAX_FRAMELEN & 0xff);
     writereg(MAMXFLH, MAX_FRAMELEN >> 8);
 
-    /* Set back-to-back inter packet gap */
-    writereg(MABBIPG, 0x15);
-
-    writereg(MACON4, (1<<6));
-    writereg(MACLCON2, 63);
-    /* Set non-back-to-back packet gap */
-    writereg(MAIPGL, 0x12);
-    writereg(MAIPGH, 0x0c);
+//    writereg(MACON4, (1<<6));
+//    writereg(MACLCON2, 63);
 
     /* Set MAC address */
     writereg(MAADR5, enc_mac_addr[0]);
@@ -437,8 +458,9 @@ reset(void)
 
     /* Don't worry about PHY configuration for now */
 
-//    /* Turn on autoincrement for buffer access */
-//    writereg(ECON2, readreg(ECON2) | ECON2_AUTOINC);
+    /* Turn on autoincrement for buffer access */
+    setregbank(ECON2);
+    writereg(ECON2, readreg(ECON2) | ECON2_AUTOINC);
 
     enc28j60_phy_write(PHLCON, 0X476);	//0x476
     enc28j60_clkout(2);
@@ -461,25 +483,38 @@ enc28j60_init(uint8_t *mac_addr)
 int
 enc28j60_send(uint8_t *pdat, uint16_t len)
 {
+    uint16_t retry = 0;
+    uint32_t level = 0;
     if(!initialized) {
         return -1;
     }
-
-    while ((readreg(ECON1) & ECON1_TXRTS) != 0);
+//    while ((readreg(ECON1) & ECON1_TXRTS) && (retry < 0xFFFF))
+//    {
+//        retry++;
+//    }
+//    if(retry >= 0xFFFF)
+//    {
+//        enc_write_op(ENC28J60_BIT_FIELD_CLR, ECON1, ECON1_TXRTS);
+//    }
+    level = enc28j60_interrupt_disable();
+    while((readreg(ECON1)& ECON1_TXRTS) != 0);
     writereg(EWRPTL, TXSTART_INIT & 0xFF);
     writereg(EWRPTH, TXSTART_INIT >> 8);
     /* TXND pointer */
     writereg(ETXNDL,(TXSTART_INIT + len) & 0xFF);
     writereg(ETXNDH,(TXSTART_INIT + len) >> 8);
+
+		
     enc_write_op(ENC28J60_WRITE_BUF_MEM, 0, 0x00);
     //write to the buffer
     writedata(pdat, len);
     enc_write_op(ENC28J60_BIT_FIELD_SET, ECON1, ECON1_TXRTS);
-		enc_write_op(ENC28J60_BIT_FIELD_SET, ECON1, ECON1_TXRTS);
     if ((readreg(EIR) & EIR_TXERIF))
     {
+        setregbank(ECON1);
         enc_write_op(ENC28J60_BIT_FIELD_CLR, ECON1, ECON1_TXRTS);
     }
+    enc28j60_interrupt_enable(level);
     return 0;
 }
 /*---------------------------------------------------------------------------*/
@@ -544,14 +579,14 @@ enc28j60_regs(void)
     PRINTF("-- enc28j60 registers:\n");
     PRINTF("Cntrl: ECON1 ECON2 ESTAT  EIR  EIE\n");
     PRINTF("       0x%02x  0x%02x  0x%02x  0x%02x  0x%02x\n",readreg(ECON1), readreg(ECON2), readreg(ESTAT), readreg(EIR), readreg(EIE));
-    PRINTF("HwRevID: 0x%02x\n", readreg(0x12));
+    PRINTF("HwRevID: 0x%02x\n", readreg(EREVID));
     PRINTF("MAC  : MAC 3 MAADR4 MAADR5\n");
     PRINTF("      0x%02x 0x%02x   0x%02x\n", readreg(MAADR3), readreg(MAADR4), readreg(MAADR5));
     PRINTF("Rx   : ERXST  ERXND  ERXWRPT ERXRDPT ERXFCON EPKTCNT MAMXFL\n");
     PRINTF("       0x%04x 0x%04x 0x%04x  0x%04x  ",
            (readreg(ERXSTH) << 8) | readreg(ERXSTL),
            (readreg(ERXNDH) << 8) | readreg(ERXNDL),
-           (readreg(0x0F) << 8) | readreg(0x0E),
+           (readreg(ERXWRPTH) << 8) | readreg(ERXWRPTL),
            (readreg(ERXRDPTH) << 8) | readreg(ERXRDPTL));
     PRINTF("0x%02x    0x%02x    0x%04x\n", readreg(ERXFCON), readreg(EPKTCNT),
            (readreg(MAMXFLH) << 8) | readreg(MAMXFLL));
@@ -559,7 +594,7 @@ enc28j60_regs(void)
     PRINTF("       0x%04x 0x%04x 0x%02x     0x%02x     0x%02x\n",
            (readreg(ETXSTH) << 8) | readreg(ETXSTL),
            (readreg(ETXNDH) << 8) | readreg(ETXNDL),
-           readreg(0x08), readreg(0x09), readreg(0x0D));
+           readreg(MACLCON1), readreg(MACLCON2), readreg(MAPHSUP));
 }
 
 

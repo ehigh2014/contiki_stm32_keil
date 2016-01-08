@@ -58,7 +58,7 @@ uint8_t ptimer_expired(ptimer_t* ptimer)
 //MAC
 struct uip_eth_addr uip_mac;
 
-static uint8_t ethernet_mac[6] = {0xA3, 0x52, 0x33, 0x01, 0x02, 0x03};
+static uint8_t ethernet_mac[6] = {0x04, 0x02, 0x35, 0x00, 0x01, 0x01};
 
 void
 uip_mac_init(void)
@@ -84,10 +84,10 @@ enc_example_init(void)
     uip_init();
 //    uip_arp_init();
     //set local ip addr
-    uip_ipaddr(&ipaddr, 192, 168, 0, 16);
+    uip_ipaddr(&ipaddr, 192, 168, 1, 16);
     uip_sethostaddr(&ipaddr);
     //set the router addr
-    uip_ipaddr(&ipaddr, 192, 168, 0, 1);
+    uip_ipaddr(&ipaddr, 192, 168, 1, 1);
     uip_setdraddr(&ipaddr);
     //set the netmask
     uip_ipaddr(&ipaddr, 255, 255, 255, 0);
@@ -111,9 +111,9 @@ PROCESS_THREAD(enc_ex_process, ev, data)
     {
         static struct etimer et;
         uint8_t i;
-//        etimer_set(&et, 1);
-//        PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
-				PROCESS_WAIT_EVENT_UNTIL(ev==PROCESS_EVENT_POLL);
+        etimer_set(&et, 1);
+        PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
+//				PROCESS_WAIT_EVENT_UNTIL(ev==PROCESS_EVENT_POLL);
         //todo:
         uip_len = enc28j60_read(uip_buf, UIP_CONF_BUFFER_SIZE);
         if(uip_len >0)
@@ -135,6 +135,7 @@ PROCESS_THREAD(enc_ex_process, ev, data)
                 uip_arp_arpin();
                 if(uip_len > 0)
                 {
+									PRINTF("uip len:%d \n",uip_len);
                     enc28j60_send(uip_buf, uip_len);
                 }
             }
@@ -193,6 +194,11 @@ void exa_appcall(void)
 void exa_uip_appcall(void)
 {
 
+}
+
+void uip_log(char *m)
+{			    
+	PRINTF("uIP log: %s \r\n", m);
 }
 
 #endif
